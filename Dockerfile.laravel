@@ -1,0 +1,11 @@
+FROM defyma/s2i-fedora34-php81-pdooci
+
+USER root
+
+
+RUN sed -i 's#<Directory "/opt/app-root/src">#<Directory "/opt/app-root/src/public">#' /etc/httpd/conf/httpd.conf
+# create ENV DOCUMENTROOT
+ENV DOCUMENTROOT="/public"
+
+USER 1001
+CMD /usr/libexec/s2i/run
